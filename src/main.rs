@@ -13,7 +13,7 @@ use chrono::{DateTime, Utc, Timelike};
 
 mod keys;
 
-use keys::{ Key, Position };
+use crate::keys::{ Key, Position };
 
 #[cfg(windows)]
 fn run(file: &mut File) {
@@ -133,15 +133,8 @@ fn log(file: &mut File, s: String) {
     }
 }
 
-fn to_key(key: u8) -> Key {
-    Key::from_u8(key)
-
-
-
-}
-
 fn keycode_to_string(k: u8) -> String {
-    return format!("{:?)", Key::from_u8(k));
+    format!("{:?}", Key::from_u8(k))
 }
 
 fn get_mouse_pos() -> Position {

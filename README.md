@@ -1,6 +1,5 @@
-# Windows Keylogger in Rust
+# Keylogger in Rust
 
-A keylogger written in Rust using [winapi-rs](https://github.com/retep998/winapi-rs)
-only works on Windows.
+Multiplatform global keylogger, based on https://github.com/thomaslienbacher/win-keylogger-rs
 
 Tested in Windows 10

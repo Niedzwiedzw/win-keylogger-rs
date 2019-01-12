@@ -1,6 +1,5 @@
 use crate::get_mouse_pos;
 
-#[derive(Debug)]
 pub type Position = (i32, i32);
 
 #[derive(Eq, PartialEq, Copy, Clone, Debug)]
@@ -147,7 +146,7 @@ pub enum Key {
 impl Key {
     pub fn from_u8(code: u8) -> Self {
         match code {
-            65..90 => Key::Char(key as char),
+            65 ... 90 => Key::Char(code as char),
 
             0x01 => Key::LBUTTON(get_mouse_pos()),
             0x02 => Key::RBUTTON(get_mouse_pos()),
@@ -283,7 +282,7 @@ impl Key {
             0xFD => Key::PA1,
             0xFE => Key::OEM_CLEAR,
 
-            key => Key::UNKNOWN(key)
+            _ => Key::UNKNOWN(code)
         }
     }
 }

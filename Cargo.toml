@@ -1,7 +1,7 @@
 [package]
 name = "win-keylogger-rs"
 version = "0.1.0"
-authors = ["Thomas Lienbacher <lienbacher.tom@gmail.com>"]
+authors = ["Thomas Lienbacher <lienbacher.tom@gmail.com>", "Wojciech Brożek <niedzwiedzwo@gmail.com>"]
 edition = "2018"
 
 [dependencies]

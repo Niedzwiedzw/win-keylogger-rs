@@ -2,3 +2,4 @@
 **/*.rs.bk
 venv
 log-*.log
+.idea
